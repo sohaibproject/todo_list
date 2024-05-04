@@ -13,7 +13,6 @@ export const getOptions = (config: ApiConfig): ApiOptions => {
 
   return { ...defaultApiOptions, ...newOptions };
 };
-// esm_get-safe-id_get-safe-id_js-node_modules_photoswipe_dis-5cc695.chunk.js net::ERR_INTERNET_DISCONNECTED
 
 export const generateDefaultMessage = (method: ApiMethods) => {
   if (method === 'POST') return 'success Add';

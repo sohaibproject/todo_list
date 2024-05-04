@@ -10,9 +10,6 @@ export interface ServerErrorModel {
   message: string;
 }
 const formatErrorMessage = (error: unknown): ErrorType => {
-  //(e.g: error inside try-catch block )
-
-  /*All error except axios error */
   if (!isAxiosError(error)) return defaultReturn;
 
   const formatError = formatAxiosError(error);

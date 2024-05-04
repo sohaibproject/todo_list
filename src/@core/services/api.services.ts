@@ -2,21 +2,14 @@ import axios from 'axios';
 import { baseURL } from '../config/api.config';
 import { ApiConfig, ApiData } from './typing/types';
 import { prepareRequest, request } from './helper/helper';
-import { getToken } from '../utils/storage/token';
 
-const instanceOptions = (token: string | boolean | null) => ({
+const instanceOptions = () => ({
   baseURL: baseURL,
-  //baseURL: 'http://localhost:8087/api/v1' ,
-  silent: true,
-  headers: {
-    'x-auth-token': token,
-  },
-  /*timeout: 200*/
 });
 
-export let instance = axios.create(instanceOptions(getToken()));
+export let instance = axios.create(instanceOptions());
 
-export const refreshToken = (newToken: string) => (instance = axios.create(instanceOptions(newToken)));
+// export const refreshToken = (newToken: string) => (instance = axios.create(instanceOptions()));
 
 export const $axios = {
   get: async (url: string, config?: ApiConfig) => {

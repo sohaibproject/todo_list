@@ -2,8 +2,6 @@ import { ErrorType } from '../typing';
 import { getStatusTitle } from './helper';
 
 import { defaultReturn } from './data';
-import { store } from '../../../../redux/store';
-import { logout } from '../../../../redux/features/auth/authSlice';
 
 /**
  * Handles errors coming from the backend API response and formats them for display.
@@ -18,9 +16,8 @@ const handelBackendErrors = (data: any, status: number): ErrorType => {
 
   if ([404, 400, 401, 403, 406].includes(status)) {
     return {
-      errors: data.msg,
+      errors: data.message ?? 'server error',
       title: getStatusTitle(status),
-      callback: status === 401 && data[0].code === 'TokenExpiredError' ? () => store.dispatch(logout()) : undefined,
     };
   }
 
