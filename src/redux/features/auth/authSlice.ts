@@ -4,8 +4,10 @@ import { AuthInitialState, UserCredential } from './types';
 import config from '../../helpers/Headers-config';
 
 import { UserModel } from './models';
-import { $axios, refreshToken } from '../../../@core/services/api.services';
+import { $axios } from '../../../@core/services/api.services';
 import { encryptMessage } from '../../../@core/utils/crypto/cryoto';
+import qs from 'qs';
+
 const NAME_SPACE: string = 'auth';
 const initialState: AuthInitialState = {
   is_auth: false,
@@ -14,12 +16,17 @@ const initialState: AuthInitialState = {
 };
 
 export const login = createAsyncThunk(NAME_SPACE, async (fromData: UserCredential, thunkAPI) => {
+  const requestBody = qs.stringify(fromData);
+  // console.log('requestBody', requestBody);
+
   try {
-    const body = {
-      email: fromData.email,
-      password: fromData.password,
-    };
-    const res = await $axios.post('users/login', body, config);
+    const res = await $axios.post('Tests/scripts/user-login.php', requestBody, config);
+    // const res = await axios.post('https://dev.rapptrlabs.com/Tests/scripts/user-login.php', requestBody, {
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded',
+    //   },
+    // });
+
     return res;
   } catch (error: any) {
     return thunkAPI.rejectWithValue('server error');
@@ -45,7 +52,6 @@ const authSlice = createSlice({
       state.loading = false;
       state.is_auth = true;
       state.user = action.payload;
-      refreshToken(action.payload.user_token);
     });
     builder.addCase(login.pending, (state, action) => {
       state.loading = true;
@@ -53,7 +59,7 @@ const authSlice = createSlice({
     builder.addCase(login.rejected, (state, action) => {
       state.loading = false;
     });
-    //  #endregion
+    //  #endregion77
   },
 });
 

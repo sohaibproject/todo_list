@@ -1,5 +1,5 @@
 const TodoPage = () => {
-  return <div>TodoPage</div>;
+  return <div className='text-red-500'>TodoPage</div>;
 };
 
 export default TodoPage;
