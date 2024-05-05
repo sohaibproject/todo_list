@@ -7,26 +7,20 @@ import { UserModel } from './models';
 import { $axios } from '../../../@core/services/api.services';
 import { encryptMessage } from '../../../@core/utils/crypto/cryoto';
 import qs from 'qs';
+import { loadInitialState } from './helper';
 
 const NAME_SPACE: string = 'auth';
-const initialState: AuthInitialState = {
-  is_auth: false,
-  loading: false,
-  user: null,
-};
+// const initialState: AuthInitialState = {
+//   is_auth: false,
+//   loading: false,
+//   user: null,
+// };
+const initialState: AuthInitialState = loadInitialState();
 
 export const login = createAsyncThunk(NAME_SPACE, async (fromData: UserCredential, thunkAPI) => {
   const requestBody = qs.stringify(fromData);
-  // console.log('requestBody', requestBody);
-
   try {
     const res = await $axios.post('Tests/scripts/user-login.php', requestBody, config);
-    // const res = await axios.post('https://dev.rapptrlabs.com/Tests/scripts/user-login.php', requestBody, {
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //   },
-    // });
-
     return res;
   } catch (error: any) {
     return thunkAPI.rejectWithValue('server error');
@@ -38,10 +32,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state, action: PayloadAction) => {
-      state.is_auth = false;
+      state.isAuth = false;
       state.user = null;
       state.loading = true;
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
     },
   },
 
@@ -49,8 +44,10 @@ const authSlice = createSlice({
     //#region login
     builder.addCase(login.fulfilled, (state, action: PayloadAction<UserModel>) => {
       localStorage.setItem('token', encryptMessage(action.payload.user_token));
+      const { user_token, ...rest } = action.payload;
+      localStorage.setItem('user', encryptMessage(rest));
       state.loading = false;
-      state.is_auth = true;
+      state.isAuth = true;
       state.user = action.payload;
     });
     builder.addCase(login.pending, (state, action) => {

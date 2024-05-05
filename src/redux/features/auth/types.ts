@@ -2,7 +2,7 @@ import { UserModel } from './models';
 
 export interface AuthInitialState {
   loading: boolean;
-  is_auth: boolean | null;
+  isAuth: boolean | null;
   user: UserModel | null;
 }
 
