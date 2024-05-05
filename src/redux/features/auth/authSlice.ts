@@ -10,11 +10,6 @@ import qs from 'qs';
 import { loadInitialState } from './helper';
 
 const NAME_SPACE: string = 'auth';
-// const initialState: AuthInitialState = {
-//   is_auth: false,
-//   loading: false,
-//   user: null,
-// };
 const initialState: AuthInitialState = loadInitialState();
 
 export const login = createAsyncThunk(NAME_SPACE, async (fromData: UserCredential, thunkAPI) => {
@@ -31,7 +26,7 @@ const authSlice = createSlice({
   name: NAME_SPACE,
   initialState,
   reducers: {
-    logout: (state, action: PayloadAction) => {
+    logout: (state) => {
       state.isAuth = false;
       state.user = null;
       state.loading = true;
@@ -50,10 +45,10 @@ const authSlice = createSlice({
       state.isAuth = true;
       state.user = action.payload;
     });
-    builder.addCase(login.pending, (state, action) => {
+    builder.addCase(login.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(login.rejected, (state, action) => {
+    builder.addCase(login.rejected, (state) => {
       state.loading = false;
     });
     //  #endregion77
