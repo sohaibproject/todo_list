@@ -1,7 +1,7 @@
 import * as CryptoJS from 'crypto-js';
 
 // const SECRET_KEY = process.env.REACT_APP_SECRETE_KEY ?? 'miniServer';
-const SECRET_KEY = 'miniServer';
+const SECRET_KEY = 'todo-list';
 const invalidKey = 'REACT_APP_SECRETE_KEY environment variable not set. Please set the variable with a secure secret key';
 
 if (!SECRET_KEY) throw new Error(invalidKey);
