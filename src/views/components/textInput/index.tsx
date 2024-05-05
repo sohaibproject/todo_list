@@ -11,10 +11,10 @@ const CustomInput = (props: InputPropsWithFormik<TextInputProps>) => {
       <LabelInput label={label as string} required={required} />
 
       <TextInput
-        // className={'input'}
         placeholder={placeholder ?? (label as string) ?? undefined}
         type={type ?? 'text'}
         disabled={disabled}
+        // readOnly={true}
         variant='filled'
         name={name}
         onChange={formik.handleChange}
