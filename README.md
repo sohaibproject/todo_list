@@ -13,8 +13,9 @@ A simple Todo List web application built with React, TypeScript, and Tailwind CS
 - React
 - TypeScript
 - Tailwind CSS
-- React Router (if applicable)
-- Other dependencies (if any)
+- Vite
+- React Router 
+- Other dependencies
 
 ## Getting Started
 To get started with the Todo List app, follow these steps:
