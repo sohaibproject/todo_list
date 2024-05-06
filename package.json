@@ -1,6 +1,6 @@
 {
   "name": "todo-list",
-  "homepage": ".",
+  "homepage": "%PUBLIC_URL%",
   "private": true,
   "version": "0.0.0",
   "type": "module",
