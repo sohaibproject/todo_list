@@ -19,11 +19,8 @@ jobs:
         with:
           node-version: 16
 
-      - name: Set PUBLIC_URL environment variable
-        run: echo "PUBLIC_URL=/todo-list/" >> $GITHUB_ENV
-
       - name: Install dependencies
-        run: npm install
+        uses: bahmutov/npm-install@v1
 
       - name: Build project
         run: npm run build
