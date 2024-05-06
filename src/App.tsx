@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import PrivateRoute from './@core/routes/PrivateRoute';
 // import TodoPage from './views/pages/todo';
@@ -11,7 +11,7 @@ import GlobalLoading from './views/components/loading/GlobalLoading';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Suspense fallback={<GlobalLoading />}>
         <Routes>
           <Route path='/' element={<Navigate replace to='/login' />} />
@@ -30,7 +30,7 @@ function App() {
           <Route path='*' element={<>...authorazation </>} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
