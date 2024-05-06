@@ -25,7 +25,11 @@ git clone https://github.com/sohaibproject/todo-list.git
  npm install
 3. Run the app 
 ## Screenshots
-Include screenshots of your app to give users an idea of what it looks like.
+<img src="loginPage.png">
+<img src="lightModeApp.png">
+<img src="darkModeApp.png">
+
+
 
 
 
